@@ -9,7 +9,10 @@ const Stack = createStackNavigator();
 
 export const StackNavigation: React.FC<StackNavigationProps> = ({}) => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
       <Stack.Screen name="ImageScreen" component={ImageScreen} />
       <Stack.Screen name="ImageDetailsScreen" component={ImageDetailsScreen} />
     </Stack.Navigator>
