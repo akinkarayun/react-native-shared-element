@@ -8,26 +8,20 @@ import {
   View,
 } from 'react-native';
 import Animated, {
-  createAnimatedPropAdapter,
-  FadeIn,
   interpolate,
   useAnimatedStyle,
   useSharedValue,
-  withDelay,
   withTiming,
 } from 'react-native-reanimated';
-
-interface ImageDetailsScreenProps {}
+import {Props} from '../navigation/StackNavigation';
 
 const {width} = Dimensions.get('window');
 
-export const ImageDetailsScreen: React.FC<ImageDetailsScreenProps> = ({
+export const ImageDetailsScreen: React.FC<Props> = ({
   route,
   navigation,
-}: any) => {
+}: Props) => {
   const {imageLink, imageTitle, imagePlace} = route.params;
-
-  console.log(imagePlace);
   const animatedValue = useSharedValue(0);
 
   useEffect(() => {
@@ -56,9 +50,7 @@ export const ImageDetailsScreen: React.FC<ImageDetailsScreenProps> = ({
 
   return (
     <View style={styles.imageContainer}>
-      <Animated.View
-        // entering={FadeIn}
-        style={[styles.image, imageContainerStyle]}>
+      <Animated.View style={[styles.image, imageContainerStyle]}>
         <Image
           style={styles.image}
           resizeMode="contain"

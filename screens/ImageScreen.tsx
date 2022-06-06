@@ -7,9 +7,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-
-interface ImageScreenProps {}
+import {Props} from '../navigation/StackNavigation';
 
 const image = [
   {
@@ -46,7 +44,7 @@ const image = [
 
 const {width} = Dimensions.get('window');
 
-export const ImageScreen: React.FC<ImageScreenProps> = ({navigation}: any) => {
+export const ImageScreen: React.FC<Props> = ({navigation}: Props) => {
   const imageRef = useRef<Image>(null);
   const [imagePlace, setImagePlace] = React.useState({
     x: 0,
