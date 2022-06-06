@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Dimensions,
   Image,
@@ -7,6 +7,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Animated, {
+  createAnimatedPropAdapter,
+  FadeIn,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withTiming,
+} from 'react-native-reanimated';
 
 interface ImageDetailsScreenProps {}
 
@@ -16,23 +25,54 @@ export const ImageDetailsScreen: React.FC<ImageDetailsScreenProps> = ({
   route,
   navigation,
 }: any) => {
-  const {params} = route;
+  const {imageLink, imageTitle, imagePlace} = route.params;
+
+  console.log(imagePlace);
+  const animatedValue = useSharedValue(0);
+
+  useEffect(() => {
+    animatedValue.value = 0;
+    animatedValue.value = withTiming(1, {duration: 500});
+  }, []);
+
+  const imageContainerStyle = useAnimatedStyle(
+    () => ({
+      position: 'absolute',
+      top: interpolate(animatedValue.value, [0, 1], [imagePlace.pageY, 0]),
+      left: interpolate(animatedValue.value, [0, 1], [imagePlace.pageX, 0]),
+      width: interpolate(
+        animatedValue.value,
+        [0, 1],
+        [imagePlace.width, width],
+      ),
+      height: interpolate(
+        animatedValue.value,
+        [0, 1],
+        [imagePlace.height, 200],
+      ),
+    }),
+    [],
+  );
 
   return (
     <View style={styles.imageContainer}>
-      <Image
-        style={styles.image}
-        resizeMode="contain"
-        resizeMethod="resize"
-        source={{uri: params.params}}
-      />
-      <Text style={styles.text}>{params.imageTitle}</Text>
+      <Animated.View
+        // entering={FadeIn}
+        style={[styles.image, imageContainerStyle]}>
+        <Image
+          style={styles.image}
+          resizeMode="contain"
+          resizeMethod="resize"
+          source={{uri: imageLink}}
+        />
+        <Text style={styles.text}>{imageTitle}</Text>
 
-      <TouchableOpacity
-        style={{alignSelf: 'flex-start', height: 50}}
-        onPress={() => navigation.goBack()}>
-        <Text style={styles.text}>Back</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={{alignSelf: 'flex-start', height: 50}}
+          onPress={() => navigation.goBack()}>
+          <Text style={styles.text}>Back</Text>
+        </TouchableOpacity>
+      </Animated.View>
     </View>
   );
 };

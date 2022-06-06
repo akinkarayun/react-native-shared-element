@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {
   Dimensions,
   Image,
@@ -47,10 +47,23 @@ const image = [
 const {width} = Dimensions.get('window');
 
 export const ImageScreen: React.FC<ImageScreenProps> = ({navigation}: any) => {
+  const imageRef = useRef<Image>(null);
+  const [imagePlace, setImagePlace] = React.useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+    pageX: 0,
+    pageY: 0,
+  });
   const navigateToImageDetails = (imageLink: string, imageTitle: string) => {
     navigation.navigate('ImageDetailsScreen', {
-      params: imageLink,
+      imageLink,
       imageTitle,
+      imagePlace,
+    });
+    imageRef.current?.measure((x, y, width, height, pageX, pageY) => {
+      setImagePlace({x, y, width, height, pageX, pageY});
     });
   };
   return (
@@ -61,6 +74,7 @@ export const ImageScreen: React.FC<ImageScreenProps> = ({navigation}: any) => {
           key={item.id}
           style={styles.imageContainer}>
           <Image
+            ref={imageRef}
             style={styles.image}
             resizeMode="contain"
             resizeMethod="resize"

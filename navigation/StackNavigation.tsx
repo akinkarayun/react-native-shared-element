@@ -14,7 +14,15 @@ export const StackNavigation: React.FC<StackNavigationProps> = ({}) => {
         headerShown: false,
       }}>
       <Stack.Screen name="ImageScreen" component={ImageScreen} />
-      <Stack.Screen name="ImageDetailsScreen" component={ImageDetailsScreen} />
+      <Stack.Screen
+        // options={() => {
+        //   return {
+        //     animationEnabled: false,
+        //   };
+        // }}
+        name="ImageDetailsScreen"
+        component={ImageDetailsScreen}
+      />
     </Stack.Navigator>
   );
 };
