@@ -1,5 +1,12 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 interface ImageDetailsScreenProps {}
 
@@ -7,6 +14,7 @@ const {width} = Dimensions.get('window');
 
 export const ImageDetailsScreen: React.FC<ImageDetailsScreenProps> = ({
   route,
+  navigation,
 }: any) => {
   const {params} = route;
 
@@ -19,6 +27,12 @@ export const ImageDetailsScreen: React.FC<ImageDetailsScreenProps> = ({
         source={{uri: params.params}}
       />
       <Text style={styles.text}>{params.imageTitle}</Text>
+
+      <TouchableOpacity
+        style={{alignSelf: 'flex-start', height: 50}}
+        onPress={() => navigation.goBack()}>
+        <Text style={styles.text}>Back</Text>
+      </TouchableOpacity>
     </View>
   );
 };

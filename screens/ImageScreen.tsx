@@ -22,29 +22,29 @@ const image = [
     id: 2,
     title: 'Image 2',
     imageLink:
-      'https://images.unsplash.com/photo-1654124803057-a07f6323a147?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1654448190693-f59b70e5ee3c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 3,
     title: 'Image 3',
     imageLink:
-      'https://images.unsplash.com/photo-1654124803057-a07f6323a147?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1654378550791-5360093aaf31?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 4,
     title: 'Image 4',
     imageLink:
-      'https://images.unsplash.com/photo-1654124803057-a07f6323a147?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1654448189789-b823e1794844?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 5,
     title: 'Image 5',
     imageLink:
-      'https://images.unsplash.com/photo-1654124803057-a07f6323a147?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1654424344395-b806099dcd24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80',
   },
 ];
 
-const {width, height} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 export const ImageScreen: React.FC<ImageScreenProps> = ({navigation}: any) => {
   const navigateToImageDetails = (imageLink: string, imageTitle: string) => {
@@ -54,7 +54,7 @@ export const ImageScreen: React.FC<ImageScreenProps> = ({navigation}: any) => {
     });
   };
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor: 'rgba(255, 87, 167, 0.6)'}}>
       {image.map(item => (
         <Pressable
           onPress={() => navigateToImageDetails(item.imageLink, item.title)}
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     padding: 20,
     borderRadius: 20,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(25, 117, 177, 0.6)',
     borderWidth: 1,
   },
   image: {
