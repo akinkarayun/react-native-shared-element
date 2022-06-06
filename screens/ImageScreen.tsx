@@ -1,5 +1,13 @@
 import React from 'react';
-import {Dimensions, Image, ScrollView, StyleSheet, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 interface ImageScreenProps {}
 
@@ -38,18 +46,27 @@ const image = [
 
 const {width, height} = Dimensions.get('window');
 
-export const ImageScreen: React.FC<ImageScreenProps> = () => {
+export const ImageScreen: React.FC<ImageScreenProps> = ({navigation}: any) => {
+  const navigateToImageDetails = (imageLink: string, imageTitle: string) => {
+    navigation.navigate('ImageDetailsScreen', {
+      params: imageLink,
+      imageTitle,
+    });
+  };
   return (
     <ScrollView>
       {image.map(item => (
-        <View key={item.id} style={styles.imageContainer}>
+        <Pressable
+          onPress={() => navigateToImageDetails(item.imageLink, item.title)}
+          key={item.id}
+          style={styles.imageContainer}>
           <Image
             style={styles.image}
             resizeMode="contain"
             resizeMethod="resize"
             source={{uri: item.imageLink}}
           />
-        </View>
+        </Pressable>
       ))}
     </ScrollView>
   );
